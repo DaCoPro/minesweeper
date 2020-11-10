@@ -53,6 +53,7 @@ function handleClick (evt) {
     revealed.push(parseInt(evt.target.id));
     
     render();
+    checkWin();
 }
 
 //---------------------------------------------------------secondary functions here
@@ -95,6 +96,7 @@ function resetState() {
 function resetBoard () {
     for (i = 0; i < cells.length; i++) {
         cells[i].innerHTML = '';
+        cells[i].style.backgroundColor = '#A4D04F';
     }
 }
 function getMines () {
@@ -208,6 +210,18 @@ function evalCounter (counter) {
 }
 //----------------------------------------RUNS DURING GAMEPLAY
 
+function checkWin () {
+    mines.forEach(function(mine) {
+        if (revealed.includes(mine)) {
+            gameStatus = 'L';
+        }
+
+    });
+    if (revealed.length + mines.length === 100) {
+        gameStatus = 'W';
+    } 
+}
+
 function renderCells () {
     //only change HTML vals for revealed cells
 
@@ -215,33 +229,42 @@ function renderCells () {
         if (mines.includes(parseInt(cells[i].id )) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = ('B');
+            cells[i].style.backgroundColor = 'red';
         } else if (zeros.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
-            cells[i].innerHTML = '';
+            cells[i].style.backgroundColor = 'white';
         } else if (ones.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '1';
+            cells[i].style.backgroundColor = 'white';
         } else if (twos.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '2';
+            cells[i].style.backgroundColor = 'white';
         } else if (threes.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '3';
+            cells[i].style.backgroundColor = 'white';
         } else if (fours.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '4';
+            cells[i].style.backgroundColor = 'white';
         } else if (fives.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '5';
+            cells[i].style.backgroundColor = 'white';
         } else if (sixes.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '6';
+            cells[i].style.backgroundColor = 'white';
         } else if (sevens.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '7';
+            cells[i].style.backgroundColor = 'white';
         } else if (eights.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '8';
+            cells[i].style.backgroundColor = 'white';
         }
         // is it a zero? 
         // if yes, write code to reveal adjacents based on grid positoin, then call renderCells again.
