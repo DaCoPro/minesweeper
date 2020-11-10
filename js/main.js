@@ -210,8 +210,26 @@ function renderCells () {
     //is it revealed?
     //if yes, check if it's a zero, 
     for (i = 0; i < cells.length; i++) {
-        if (cells[i].nodeName.toLowerCase() === 'div' && mines.includes(parseInt(cells[i].id))) {
+        if (mines.includes(parseInt(cells[i].id))) {
             cells[i].innerHTML = ('B');
+        } else if (zeros.includes(parseInt(cells[i].id))) {
+            cells[i].innerHTML = '';
+        } else if (ones.includes(parseInt(cells[i].id))) {
+            cells[i].innerHTML = '1';
+        } else if (twos.includes(parseInt(cells[i].id))) {
+            cells[i].innerHTML = '2';
+        } else if (threes.includes(parseInt(cells[i].id))) {
+            cells[i].innerHTML = '3';
+        } else if (fours.includes(parseInt(cells[i].id))) {
+            cells[i].innerHTML = '4';
+        } else if (fives.includes(parseInt(cells[i].id))) {
+            cells[i].innerHTML = '5';
+        } else if (sixes.includes(parseInt(cells[i].id))) {
+            cells[i].innerHTML = '6';
+        } else if (sevens.includes(parseInt(cells[i].id))) {
+            cells[i].innerHTML = '7';
+        } else if (eights.includes(parseInt(cells[i].id))) {
+            cells[i].innerHTML = '8';
         }
         // is it a zero? 
         // if yes, write code to reveal adjacents based on grid positoin, then call renderCells again.
