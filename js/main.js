@@ -111,45 +111,73 @@ function getProximous() {
     let counter = 0;
     for (i = 0; i < cells.length; i++) {
         if (mines.includes(parseInt(cells[i].id))) {
-            console.log('mine');
         } else if (tLCorner.includes(cells[i].id)) {
             if (mines.includes(parseInt(cells[i].id) + 1)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) + 10)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) + 11)) counter += 1;
             evalCounter(counter);
             counter = 0;
-            console.log('TLC');
         } else if (tRCorner.includes(cells[i].id)) {
             if (mines.includes(parseInt(cells[i].id) - 1)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) + 9)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) + 10)) counter += 1;
             evalCounter(counter);
             counter = 0;
-            console.log('TRC');
         } else if (bLCorner.includes(cells[i].id)) {
             if (mines.includes(parseInt(cells[i].id) - 10)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) - 9)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) + 1)) counter += 1;
             evalCounter(counter);
             counter = 0;
-            console.log('BLC');
         } else if (bRCorner.includes(cells[i].id)) {
             if (mines.includes(parseInt(cells[i].id) - 11)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) - 10)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) - 1)) counter += 1;
             evalCounter(counter);
             counter = 0;
-            console.log('BRC');
-          
         } else if (tEdge.includes(cells[i].id)) {
-            //cells[i].innerHTML = 'TE';
+            if (mines.includes(parseInt(cells[i].id) - 1)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 1)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 9)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 11)) counter += 1;
+            evalCounter(counter);
+            counter = 0;
         } else if (rEdge.includes(cells[i].id)) {
-            //cells[i].innerHTML = 'RE';
+            if (mines.includes(parseInt(cells[i].id) - 10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 11)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 1)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 9)) counter += 1;
+            evalCounter(counter);
+            counter = 0;
         } else if (bEdge.includes(cells[i].id)) {
-            //cells[i].innerHTML = 'BE';
+            if (mines.includes(parseInt(cells[i].id) - 1)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 1)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) -10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) -11)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 9)) counter += 1;
+            evalCounter(counter);
+            counter = 0;
         } else if (lEdge.includes(cells[i].id)) {
-            //cells[i].innerHTML = 'LE';
+            if (mines.includes(parseInt(cells[i].id) - 10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 9)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 1)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 11)) counter += 1;
+            evalCounter(counter);
+            counter = 0;
         } else {
+            if (mines.includes(parseInt(cells[i].id) - 10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 9)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 1)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 11)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 9)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 1)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 11)) counter += 1;
+            evalCounter(counter);
+            counter = 0;
             //cells[i].innerHTML = 'mid';
         }
     }
