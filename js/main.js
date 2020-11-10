@@ -13,6 +13,7 @@ let bEdge = ['92', '93', '94', '95', '96', '97', '98', '99']
 
 /*----- app's state (variables) -----*/
 
+let gameStatus;
 let revealed;
 let mines;
 let proximous;
@@ -77,6 +78,7 @@ function render () {
 
 function resetState() {
     
+    gameStatus = null;
     revealed = [];
     mines = [];
     proximous = [];
@@ -97,7 +99,7 @@ function resetBoard () {
 }
 function getMines () {
     //i<x x is how many mines to plant! later change based on diff selected
-    for (i =1; i < 11; i++) {
+    for (i =1; i < 25; i++) {
         mines.push(getRandomInt(1, 100));
     }
 }
@@ -207,28 +209,38 @@ function evalCounter (counter) {
 //----------------------------------------RUNS DURING GAMEPLAY
 
 function renderCells () {
-    //is it revealed?
-    //if yes, check if it's a zero, 
+    //only change HTML vals for revealed cells
+
     for (i = 0; i < cells.length; i++) {
-        if (mines.includes(parseInt(cells[i].id))) {
+        if (mines.includes(parseInt(cells[i].id )) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = ('B');
-        } else if (zeros.includes(parseInt(cells[i].id))) {
+        } else if (zeros.includes(parseInt(cells[i].id)) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '';
-        } else if (ones.includes(parseInt(cells[i].id))) {
+        } else if (ones.includes(parseInt(cells[i].id)) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '1';
-        } else if (twos.includes(parseInt(cells[i].id))) {
+        } else if (twos.includes(parseInt(cells[i].id)) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '2';
-        } else if (threes.includes(parseInt(cells[i].id))) {
+        } else if (threes.includes(parseInt(cells[i].id)) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '3';
-        } else if (fours.includes(parseInt(cells[i].id))) {
+        } else if (fours.includes(parseInt(cells[i].id)) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '4';
-        } else if (fives.includes(parseInt(cells[i].id))) {
+        } else if (fives.includes(parseInt(cells[i].id)) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '5';
-        } else if (sixes.includes(parseInt(cells[i].id))) {
+        } else if (sixes.includes(parseInt(cells[i].id)) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '6';
-        } else if (sevens.includes(parseInt(cells[i].id))) {
+        } else if (sevens.includes(parseInt(cells[i].id)) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '7';
-        } else if (eights.includes(parseInt(cells[i].id))) {
+        } else if (eights.includes(parseInt(cells[i].id)) 
+            && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '8';
         }
         // is it a zero? 
