@@ -45,12 +45,8 @@ document.getElementById('reset').addEventListener('click', init);
 init();
 
 function handleClick (evt) {
-    //only allow certain clicks
     if (revealed.includes(parseInt(evt.target.id)) || 
         evt.target.id === 'board' || gameStatus !== null) return;
-    
-
-    //updates state
     revealed.push(parseInt(evt.target.id));
     checkWin();
     render();
@@ -233,16 +229,11 @@ function checkWin () {
 }
 
 function renderCells () {
-    //only change HTML vals for revealed cells
-
     for (i = 0; i < cells.length; i++) {
         if (mines.includes(parseInt(cells[i].id )) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = ('B');
             cells[i].style.backgroundColor = 'red';
-        } else if (zeros.includes(parseInt(cells[i].id)) 
-            && revealed.includes(parseInt(cells[i].id ))) {
-            cells[i].style.backgroundColor = 'white';
         } else if (ones.includes(parseInt(cells[i].id)) 
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '1';
@@ -275,12 +266,69 @@ function renderCells () {
             && revealed.includes(parseInt(cells[i].id ))) {
             cells[i].innerHTML = '8';
             cells[i].style.backgroundColor = 'white';
+        } else if (zeros.includes(parseInt(cells[i].id)) 
+        && revealed.includes(parseInt(cells[i].id ))) {
+            cells[i].style.backgroundColor = 'white';
+            //new reveal pattern below here
+            renderZeros();
+            
         }
         // is it a zero? 
         // if yes, write code to reveal adjacents based on grid positoin, then call renderCells again.
     }
 }
 
-
+function renderZeros () {
+    if (tLCorner.includes(cells[i].id)) {
+        revealed.push(parseInt(cells[i].id) + 1)
+        revealed.push(parseInt(cells[i].id) + 10)
+        revealed.push(parseInt(cells[i].id) + 11)   
+    } else if (tRCorner.includes(cells[i].id)) {
+        revealed.push(parseInt(cells[i].id) - 1)
+        revealed.push(parseInt(cells[i].id) + 9)
+        revealed.push(parseInt(cells[i].id) + 10) 
+    } else if (bLCorner.includes(cells[i].id)) {
+        revealed.push(parseInt(cells[i].id) - 10)
+        revealed.push(parseInt(cells[i].id) - 9)
+        revealed.push(parseInt(cells[i].id) + 1)
+    } else if (bRCorner.includes(cells[i].id)) {
+        revealed.push(parseInt(cells[i].id) - 11)
+        revealed.push(parseInt(cells[i].id) - 10)
+        revealed.push(parseInt(cells[i].id) - 1)
+    } else if (tEdge.includes(cells[i].id)) {
+        revealed.push(parseInt(cells[i].id) - 1)
+        revealed.push(parseInt(cells[i].id) + 1)
+        revealed.push(parseInt(cells[i].id) + 9)
+        revealed.push(parseInt(cells[i].id) + 10)
+        revealed.push(parseInt(cells[i].id) + 11)
+    } else if (rEdge.includes(cells[i].id)) {
+        revealed.push(parseInt(cells[i].id) - 10)
+        revealed.push(parseInt(cells[i].id) - 11)
+        revealed.push(parseInt(cells[i].id) - 1)
+        revealed.push(parseInt(cells[i].id) + 10)
+        revealed.push(parseInt(cells[i].id) + 9)
+    } else if (bEdge.includes(cells[i].id)) {
+        revealed.push(parseInt(cells[i].id) - 1)
+        revealed.push(parseInt(cells[i].id) + 1)
+        revealed.push(parseInt(cells[i].id) - 10)
+        revealed.push(parseInt(cells[i].id) - 11)
+        revealed.push(parseInt(cells[i].id) - 9)
+    } else if (lEdge.includes(cells[i].id)) {
+        revealed.push(parseInt(cells[i].id) - 10)
+        revealed.push(parseInt(cells[i].id) - 9)
+        revealed.push(parseInt(cells[i].id) + 1)
+        revealed.push(parseInt(cells[i].id) + 10)
+        revealed.push(parseInt(cells[i].id) + 11)
+    } else {
+        revealed.push(parseInt(cells[i].id) - 10)
+        revealed.push(parseInt(cells[i].id) - 9)
+        revealed.push(parseInt(cells[i].id) + 1)
+        revealed.push(parseInt(cells[i].id) + 11)
+        revealed.push(parseInt(cells[i].id) + 10)
+        revealed.push(parseInt(cells[i].id) + 9)
+        revealed.push(parseInt(cells[i].id) - 1)
+        revealed.push(parseInt(cells[i].id) - 11)
+    }
+}
 
 
