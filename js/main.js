@@ -29,7 +29,8 @@ let eights;
 /*----- cached element references -----*/
 
 //cache of cells for iteration in render
-const cells = document.getElementById('board').childNodes;
+const cells = document.getElementById('board').children;
+
 
 /*----- event listeners -----*/
 
@@ -75,6 +76,7 @@ function render () {
 //-----------------------------------------ONLY RUNS ON INIT
 
 function resetState() {
+    
     revealed = [];
     mines = [];
     proximous = [];
@@ -109,18 +111,36 @@ function getProximous() {
     let counter = 0;
     for (i = 0; i < cells.length; i++) {
         if (mines.includes(parseInt(cells[i].id))) {
-            return;
+            console.log('mine');
         } else if (tLCorner.includes(cells[i].id)) {
             if (mines.includes(parseInt(cells[i].id) + 1)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) + 10)) counter += 1;
             if (mines.includes(parseInt(cells[i].id) + 11)) counter += 1;
             evalCounter(counter);
+            counter = 0;
+            console.log('TLC');
         } else if (tRCorner.includes(cells[i].id)) {
-            //cells[i].innerHTML = 'C2';
+            if (mines.includes(parseInt(cells[i].id) - 1)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 9)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 10)) counter += 1;
+            evalCounter(counter);
+            counter = 0;
+            console.log('TRC');
         } else if (bLCorner.includes(cells[i].id)) {
-            //cells[i].innerHTML = 'C3';
+            if (mines.includes(parseInt(cells[i].id) - 10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 9)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) + 1)) counter += 1;
+            evalCounter(counter);
+            counter = 0;
+            console.log('BLC');
         } else if (bRCorner.includes(cells[i].id)) {
-            //cells[i].innerHTML = 'C4';
+            if (mines.includes(parseInt(cells[i].id) - 11)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 10)) counter += 1;
+            if (mines.includes(parseInt(cells[i].id) - 1)) counter += 1;
+            evalCounter(counter);
+            counter = 0;
+            console.log('BRC');
+          
         } else if (tEdge.includes(cells[i].id)) {
             //cells[i].innerHTML = 'TE';
         } else if (rEdge.includes(cells[i].id)) {
@@ -134,7 +154,7 @@ function getProximous() {
         }
     }
 }
-
+//supports getProx to reduce redundancy
 function evalCounter (counter) {
     if (counter === 0) {
         zeros.push(parseInt(cells[i].id));
