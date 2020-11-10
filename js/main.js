@@ -31,6 +31,7 @@ let eights;
 
 //cache of cells for iteration in render
 const cells = document.getElementById('board').children;
+const msg = document.getElementById('msg');
 
 
 /*----- event listeners -----*/
@@ -46,14 +47,14 @@ init();
 function handleClick (evt) {
     //only allow certain clicks
     if (revealed.includes(parseInt(evt.target.id)) || 
-        evt.target.id === 'board' ) return;
-    console.log(evt.target.id);
+        evt.target.id === 'board' || gameStatus !== null) return;
+    
 
     //updates state
     revealed.push(parseInt(evt.target.id));
-    
-    render();
     checkWin();
+    render();
+    
 }
 
 //---------------------------------------------------------secondary functions here
@@ -72,7 +73,7 @@ function init () {
 //RUNS DURING GAMEPLAY
 function render () {
     renderCells();
-    //rendermessage
+    renderMessage();
 }
 //---------------------------------------------------------------tertiary functions
 //-----------------------------------------ONLY RUNS ON INIT
@@ -210,6 +211,15 @@ function evalCounter (counter) {
 }
 //----------------------------------------RUNS DURING GAMEPLAY
 
+function renderMessage () {
+    if (gameStatus === null) {
+        msg.innerHTML = "Watch Your Step!!!"
+    } else if ( gameStatus === 'W') {
+        msg.innerHTML = "That's All of 'Em!"
+    } else if ( gameStatus === 'L') {
+        msg.innerHTML = 'BOOOOM!'
+    }
+}
 function checkWin () {
     mines.forEach(function(mine) {
         if (revealed.includes(mine)) {
