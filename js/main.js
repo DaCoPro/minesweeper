@@ -38,6 +38,7 @@ const msg = document.getElementById('msg');
 /*----- event listeners -----*/
 
 document.getElementById('board').addEventListener('click', handleClick);
+document.getElementById('board').addEventListener('contextmenu', handleRightClick);
 document.getElementById('reset').addEventListener('click', init);
 
 /*----- functions -----*/
@@ -47,17 +48,29 @@ init();
 
 function handleClick (evt) {
     if (revealed.includes(parseInt(evt.target.id)) || 
-        evt.target.id === 'board' || gameStatus !== null) return;
+        evt.target.id === 'board' || gameStatus !== null || evt.target.classList.contains('1')) return;
     revealed.push(parseInt(evt.target.id));
     if (zeros.includes(parseInt(evt.target.id))) {
         revealedZeros.push(parseInt(evt.target.id));
     }
-   for (i = 0; i < 20; i ++) {
+    for (i = 0; i < 20; i ++) {
        floodZeros();
-   }
+    }
    
     checkWin();
     render();
+}
+
+function handleRightClick (evt) {
+    if (revealed.includes(parseInt(evt.target.id)) || 
+        evt.target.id === 'board' || gameStatus !== null) {
+            return;
+        } else if (evt.target.class === undefined || evt.target.class === "0") {
+            evt.target.className +=  '1';
+        } else if (evt.target.classList.contains('1')) {
+            evt.target.removeClass('1');
+        }
+    renderFlags();
 }
 
 //---------------------------------------------------------secondary functions here
@@ -77,6 +90,8 @@ function init () {
 function render () {
     renderCells();
     renderMessage();
+    renderWin();
+    renderLoss();
 }
 
 //---------------------------------------------------------------tertiary functions
@@ -232,9 +247,38 @@ function checkWin () {
             gameStatus = 'L';
         }
     });
-    if (cells.length - mines.length === revealed.length) {
+    if (revealed.length + mines.length === cells.length + 4) {
         gameStatus = 'W';
     } 
+}
+
+function renderWin () {
+    if (gameStatus === 'W') {
+        for (i = 0; i < cells.length; i++) {
+            if (mines.includes(parseInt(cells[i].id))) {
+                cells[i].style.backgroundColor = 'green';
+                cells[i].innerHTML = '💣';
+            }
+        }
+    }
+}
+function renderLoss() {
+    if (gameStatus === 'L') {
+        for (i = 0; i < cells.length; i++) {
+            if (mines.includes(parseInt(cells[i].id))) {
+                cells[i].style.backgroundColor = 'red';
+                cells[i].innerHTML = '💥';
+            }
+        }
+    }
+}
+
+function renderFlags () {
+    for (i = 0; i < cells.length; i++) {
+        if (cells[i].classList.contains('1')) {
+            cells[i].innerHTML = '🚩';
+        } 
+    }
 }
 
 function renderCells () {
