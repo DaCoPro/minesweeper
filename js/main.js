@@ -15,6 +15,7 @@ let bEdge = ['92', '93', '94', '95', '96', '97', '98', '99']
 
 let gameStatus;
 let revealed;
+let revealedZeros;
 let mines;
 let proximous;
 let zeros;
@@ -48,8 +49,14 @@ function handleClick (evt) {
     if (revealed.includes(parseInt(evt.target.id)) || 
         evt.target.id === 'board' || gameStatus !== null) return;
     revealed.push(parseInt(evt.target.id));
+    if (zeros.includes(parseInt(evt.target.id))) {
+        revealedZeros.push(parseInt(evt.target.id));
+    }
+   for (i = 0; i < 20; i ++) {
+       floodZeros();
+   }
+   
     checkWin();
-
     render();
 }
 
@@ -68,11 +75,10 @@ function init () {
 }
 //RUNS DURING GAMEPLAY
 function render () {
-    
     renderCells();
     renderMessage();
-
 }
+
 //---------------------------------------------------------------tertiary functions
 //-----------------------------------------ONLY RUNS ON INIT
 
@@ -80,6 +86,7 @@ function resetState() {
     
     gameStatus = null;
     revealed = [];
+    revealedZeros = [];
     mines = [];
     proximous = [];
     zeros = [];
@@ -275,25 +282,298 @@ function renderCells () {
     }
 }
 
-
-
-
-// function floodTLCorner () {
-//     if (revealed.includes(parseInt(cells[i].id) + 1)) {
-
-//     } else {
-//         revealed.push(parseInt(cells[i].id) + 1);
-//         renderCells();
-//     } 
-//     if (revealed.includes(parseInt(cells[i].id) + 10)) {
-//     } else {
-//         revealed.push(parseInt(cells[i].id) + 10);
-//         renderCells();
-//     } 
-//     if (revealed.includes(parseInt(cells[i].id) + 11)) {
-//     } else {
-//         revealed.push(parseInt(cells[i].id) + 11);
-//         renderCells();
-//     } 
+function floodZeros () {
+    revealedZeros.forEach(function(zCell) {
+        if (tLCorner.includes(zCell.toString())) {
+            if (revealed.includes(zCell + 1)) {
+            } else {
+                revealed.push(zCell + 1);
+                if (zeros.includes(zCell + 1)) {
+                    revealedZeros.push(zCell + 1);
+                }
+            }
+            if (revealed.includes(zCell +10)) {
+            } else {
+                revealed.push(zCell + 10);
+                if (zeros.includes(zCell + 10)) {
+                    revealedZeros.push(zCell + 10);
+                }
+            }
+            if (revealed.includes(zCell +11)) {
+            } else {
+                revealed.push(zCell + 11);
+                if (zeros.includes(zCell + 11)) {
+                    revealedZeros.push(zCell + 11);
+                }
+            }
+        } else if (tRCorner.includes(zCell.toString())) {
+            if (revealed.includes(zCell - 1)) {
+            } else {
+                revealed.push(zCell - 1);
+                if (zeros.includes(zCell - 1)) {
+                    revealedZeros.push(zCell - 1);
+                }
+            }
+            if (revealed.includes(zCell + 9)) {
+            } else {
+                revealed.push(zCell + 9);
+                if (zeros.includes(zCell + 9)) {
+                    revealedZeros.push(zCell + 9);
+                }
+            }
+            if (revealed.includes(zCell + 10)) {
+            } else {
+                revealed.push(zCell + 10);
+                if (zeros.includes(zCell + 10)) {
+                    revealedZeros.push(zCell + 10);
+                }
+            }
+        } else if (bLCorner.includes(zCell.toString())) {
+            if (revealed.includes(zCell - 10)) {
+            } else {
+                revealed.push(zCell - 10);
+                if (zeros.includes(zCell - 10)) {
+                    revealedZeros.push(zCell - 10);
+                }
+            }
+            if (revealed.includes(zCell - 9)) {
+            } else {
+                revealed.push(zCell - 9);
+                if (zeros.includes(zCell - 9)) {
+                    revealedZeros.push(zCell - 9);
+                }
+            }
+            if (revealed.includes(zCell + 1)) {
+            } else {
+                revealed.push(zCell + 1);
+                if (zeros.includes(zCell + 1)) {
+                    revealedZeros.push(zCell + 1);
+                }
+            }
+        } else if (bRCorner.includes(zCell.toString())) {
+            if (revealed.includes(zCell - 11)) {
+            } else {
+                revealed.push(zCell - 11);
+                if (zeros.includes(zCell - 11)) {
+                    revealedZeros.push(zCell - 11);
+                }
+            }
+            if (revealed.includes(zCell - 10)) {
+            } else {
+                revealed.push(zCell - 10);
+                if (zeros.includes(zCell - 10)) {
+                    revealedZeros.push(zCell - 10);
+                }
+            }
+            if (revealed.includes(zCell - 1)) {
+            } else {
+                revealed.push(zCell - 1);
+                if (zeros.includes(zCell - 1)) {
+                    revealedZeros.push(zCell - 1);
+                }
+            }
+        } else if (tEdge.includes(zCell.toString())) {
+            if (revealed.includes(zCell - 1)) {
+            } else {
+                revealed.push(zCell - 1);
+                if (zeros.includes(zCell - 1)) {
+                    revealedZeros.push(zCell - 1);
+                }
+            }
+            if (revealed.includes(zCell + 1)) {
+            } else {
+                revealed.push(zCell + 1);
+                if (zeros.includes(zCell + 1)) {
+                    revealedZeros.push(zCell + 1);
+                }
+            }
+            if (revealed.includes(zCell + 9)) {
+            } else {
+                revealed.push(zCell + 9);
+                if (zeros.includes(zCell + 9)) {
+                    revealedZeros.push(zCell + 9);
+                }
+            }
+            if (revealed.includes(zCell + 10)) {
+            } else {
+                revealed.push(zCell + 10);
+                if (zeros.includes(zCell + 10)) {
+                    revealedZeros.push(zCell + 10);
+                }
+            }
+            if (revealed.includes(zCell + 11)) {
+            } else {
+                revealed.push(zCell + 11);
+                if (zeros.includes(zCell + 11)) {
+                    revealedZeros.push(zCell + 11);
+                }
+            }
+        } else if (rEdge.includes(zCell.toString())) {
+            if (revealed.includes(zCell - 10)) {
+            } else {
+                revealed.push(zCell - 10);
+                if (zeros.includes(zCell - 10)) {
+                    revealedZeros.push(zCell - 10);
+                }
+            }
+            if (revealed.includes(zCell - 11)) {
+            } else {
+                revealed.push(zCell - 11);
+                if (zeros.includes(zCell - 11)) {
+                    revealedZeros.push(zCell - 11);
+                }
+            }
+            if (revealed.includes(zCell - 1)) {
+            } else {
+                revealed.push(zCell - 1);
+                if (zeros.includes(zCell - 1)) {
+                    revealedZeros.push(zCell - 1);
+                }
+            }
+            if (revealed.includes(zCell + 10)) {
+            } else {
+                revealed.push(zCell + 10);
+                if (zeros.includes(zCell + 10)) {
+                    revealedZeros.push(zCell + 10);
+                }
+            }
+            if (revealed.includes(zCell + 9)) {
+            } else {
+                revealed.push(zCell + 9);
+                if (zeros.includes(zCell + 9)) {
+                    revealedZeros.push(zCell + 9);
+                }
+            }
+        } else if (bEdge.includes(zCell.toString())) {
+            if (revealed.includes(zCell - 1)) {
+            } else {
+                revealed.push(zCell - 1);
+                if (zeros.includes(zCell - 1)) {
+                    revealedZeros.push(zCell - 1);
+                }
+            }
+            if (revealed.includes(zCell + 1)) {
+            } else {
+                revealed.push(zCell + 1);
+                if (zeros.includes(zCell + 1)) {
+                    revealedZeros.push(zCell + 1);
+                }
+            }
+            if (revealed.includes(zCell - 10)) {
+            } else {
+                revealed.push(zCell - 10);
+                if (zeros.includes(zCell - 10)) {
+                    revealedZeros.push(zCell - 10);
+                }
+            }
+            if (revealed.includes(zCell - 11)) {
+            } else {
+                revealed.push(zCell - 11);
+                if (zeros.includes(zCell - 11)) {
+                    revealedZeros.push(zCell - 11);
+                }
+            }
+            if (revealed.includes(zCell - 9)) {
+            } else {
+                revealed.push(zCell - 9);
+                if (zeros.includes(zCell - 9)) {
+                    revealedZeros.push(zCell - 9);
+                }
+            }
+        } else if (lEdge.includes(zCell.toString())) {
+            if (revealed.includes(zCell - 10)) {
+            } else {
+                revealed.push(zCell - 10);
+                if (zeros.includes(zCell - 10)) {
+                    revealedZeros.push(zCell - 10);
+                }
+            }
+            if (revealed.includes(zCell - 9)) {
+            } else {
+                revealed.push(zCell - 9);
+                if (zeros.includes(zCell - 9)) {
+                    revealedZeros.push(zCell - 9);
+                }
+            }
+            if (revealed.includes(zCell + 1)) {
+            } else {
+                revealed.push(zCell + 1);
+                if (zeros.includes(zCell + 1)) {
+                    revealedZeros.push(zCell + 1);
+                }
+            }
+            if (revealed.includes(zCell + 10)) {
+            } else {
+                revealed.push(zCell + 10);
+                if (zeros.includes(zCell + 10)) {
+                    revealedZeros.push(zCell + 10);
+                }
+            }
+            if (revealed.includes(zCell + 11)) {
+            } else {
+                revealed.push(zCell + 11);
+                if (zeros.includes(zCell + 11)) {
+                    revealedZeros.push(zCell + 11);
+                }
+            }
+        } else {
+            if (revealed.includes(zCell - 10)) {
+            } else {
+                revealed.push(zCell - 10);
+                if (zeros.includes(zCell - 10)) {
+                    revealedZeros.push(zCell - 10);
+                }
+            }
+            if (revealed.includes(zCell - 9)) {
+            } else {
+                revealed.push(zCell - 9);
+                if (zeros.includes(zCell - 9)) {
+                    revealedZeros.push(zCell - 9);
+                }
+            }
+            if (revealed.includes(zCell + 1)) {
+            } else {
+                revealed.push(zCell + 1);
+                if (zeros.includes(zCell + 1)) {
+                    revealedZeros.push(zCell + 1);
+                }
+            }
+            if (revealed.includes(zCell + 11)) {
+            } else {
+                revealed.push(zCell + 11);
+                if (zeros.includes(zCell + 11)) {
+                    revealedZeros.push(zCell + 11);
+                }
+            }
+            if (revealed.includes(zCell + 10)) {
+            } else {
+                revealed.push(zCell + 10);
+                if (zeros.includes(zCell + 10)) {
+                    revealedZeros.push(zCell + 10);
+                }
+            }
+            if (revealed.includes(zCell + 9)) {
+            } else {
+                revealed.push(zCell + 9);
+                if (zeros.includes(zCell + 9)) {
+                    revealedZeros.push(zCell + 9);
+                }
+            }
+            if (revealed.includes(zCell - 1)) {
+            } else {
+                revealed.push(zCell - 1);
+                if (zeros.includes(zCell - 1)) {
+                    revealedZeros.push(zCell - 1);
+                }
+            }
+            if (revealed.includes(zCell - 11)) {
+            } else {
+                revealed.push(zCell - 11);
+                if (zeros.includes(zCell - 11)) {
+                    revealedZeros.push(zCell - 11);
+                }
+            }
+        }
+    })
     
-// }
+}
