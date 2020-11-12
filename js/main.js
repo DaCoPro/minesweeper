@@ -1,6 +1,5 @@
 /*----- constants -----*/
 
-//only in const for now, refactor to calculate based on changing grid eventually
 let tLCorner = ['1'];
 let tRCorner = ['10'];
 let bLCorner = ['91'];
@@ -9,7 +8,6 @@ let tEdge = ['2', '3', '4', '5', '6', '7', '8', '9']
 let rEdge = ['20', '30', '40', '50', '60', '70', '80', '90']
 let lEdge = ['11', '21', '31', '41', '51', '61', '71', '81']
 let bEdge = ['92', '93', '94', '95', '96', '97', '98', '99']
-
 
 /*----- app's state (variables) -----*/
 
@@ -33,6 +31,7 @@ let eights;
 //cache of cells for iteration in render
 const cells = document.getElementById('board').children;
 const msg = document.getElementById('msg');
+const resetBtn = document.getElementById('reset');
 
 
 /*----- event listeners -----*/
@@ -40,6 +39,7 @@ const msg = document.getElementById('msg');
 document.getElementById('board').addEventListener('click', handleClick);
 document.getElementById('board').addEventListener('contextmenu', handleRightClick);
 document.getElementById('reset').addEventListener('click', init);
+
 
 /*----- functions -----*/
 //-------------------------------------------------------------main functions here
@@ -66,15 +66,16 @@ function handleRightClick (evt) {
         evt.target.id === 'board' || gameStatus !== null) {
             return;
         } else if (evt.target.innerHTML === '') {
-            evt.target.innerHTML = '💣';
+            evt.target.innerHTML = '🎄';
+            evt.target.style.fontSize = '50px';
         } else if (evt.target.innerHTML !== '') {
             evt.target.innerHTML = ''
+            evt.target.style.fontSize = '20px';
         }
 }
 
 //---------------------------------------------------------secondary functions here
-//any function that plugs directly into the clickHandler (as few as possible)
-//ONLY RUNS ON INIT
+
 function init () {
     //reset
     resetState();
@@ -85,8 +86,9 @@ function init () {
     //display
     render();
 }
-//RUNS DURING GAMEPLAY
+
 function render () {
+    resetBtn.style.visibility = gameStatus ? 'visible' : 'hidden';
     renderCells();
     renderMessage();
     renderWin();
@@ -114,24 +116,24 @@ function resetState() {
     eights = [];
 
 }
+
 function resetBoard () {
     for (i = 0; i < cells.length; i++) {
         cells[i].innerHTML = '';
         cells[i].style.backgroundColor = '#A4D04F';
     }
 }
+
 function getMines () {
-    //i<x x is how many mines to plant! later change based on diff selected
     for (i =1; i < 25; i++) {
         mines.push(getRandomInt(1, 100));
     }
 }
-//simply generates a random number for getMines fx above
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
-//need to evaluate surrounding cells, if cell is on the edge, evaluate only actually adjacent,
-//with varying dif, refactor to cal corners and edges on it's own, then run evaluations
+
 function getProximous() {
     let counter = 0;
     for (i = 0; i < cells.length; i++) {
@@ -203,11 +205,11 @@ function getProximous() {
             if (mines.includes(parseInt(cells[i].id) - 11)) counter += 1;
             evalCounter(counter);
             counter = 0;
-            //cells[i].innerHTML = 'mid';
         }
     }
 }
-//supports getProx to reduce redundancy
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//        supports getProx to reduce redundancy
 function evalCounter (counter) {
     if (counter === 0) {
         zeros.push(parseInt(cells[i].id));
@@ -229,6 +231,7 @@ function evalCounter (counter) {
             eights.push(parseInt(cells[i].id));
         }
 }
+
 //----------------------------------------RUNS DURING GAMEPLAY
 
 function renderMessage () {
@@ -240,6 +243,7 @@ function renderMessage () {
         msg.innerHTML = 'BOOOOM!'
     }
 }
+
 function checkWin () {
     mines.forEach(function(mine) {
         if (revealed.includes(mine)) {
@@ -261,6 +265,7 @@ function renderWin () {
         }
     }
 }
+
 function renderLoss() {
     if (gameStatus === 'L') {
         for (i = 0; i < cells.length; i++) {

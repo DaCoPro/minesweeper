@@ -1,11 +1,17 @@
 
+#header {
+    background-color:#dd362e;
+    margin-top: 50px;
+    width: 100vh;
+    text-align: center;
+}
 
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color:  #91a395;
+    background-color:  #17672e;
 }
 
 #board {
@@ -15,16 +21,19 @@ body {
     height: 520px;
     width: 520px;
     /*margin: 0px;*/
-    background-color: #87ce0e;
+    background-color: #17672e;
+    margin-top: 50px;
+    font-size: 20px;
 }
 
 #board div {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: grey;
     height: 50px;
     width: 50px;
-    
 }
 
+#reset {
+    margin-top: 50px;
+}
