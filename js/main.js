@@ -1,6 +1,5 @@
 /*----- constants -----*/
 
-//only in const for now, refactor to calculate based on changing grid eventually
 let tLCorner = ['1'];
 let tRCorner = ['10'];
 let bLCorner = ['91'];
@@ -9,7 +8,6 @@ let tEdge = ['2', '3', '4', '5', '6', '7', '8', '9']
 let rEdge = ['20', '30', '40', '50', '60', '70', '80', '90']
 let lEdge = ['11', '21', '31', '41', '51', '61', '71', '81']
 let bEdge = ['92', '93', '94', '95', '96', '97', '98', '99']
-
 
 /*----- app's state (variables) -----*/
 
@@ -73,8 +71,7 @@ function handleRightClick (evt) {
 }
 
 //---------------------------------------------------------secondary functions here
-//any function that plugs directly into the clickHandler (as few as possible)
-//ONLY RUNS ON INIT
+
 function init () {
     //reset
     resetState();
@@ -85,7 +82,7 @@ function init () {
     //display
     render();
 }
-//RUNS DURING GAMEPLAY
+
 function render () {
     renderCells();
     renderMessage();
@@ -114,24 +111,24 @@ function resetState() {
     eights = [];
 
 }
+
 function resetBoard () {
     for (i = 0; i < cells.length; i++) {
         cells[i].innerHTML = '';
         cells[i].style.backgroundColor = '#A4D04F';
     }
 }
+
 function getMines () {
-    //i<x x is how many mines to plant! later change based on diff selected
     for (i =1; i < 25; i++) {
         mines.push(getRandomInt(1, 100));
     }
 }
-//simply generates a random number for getMines fx above
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
-//need to evaluate surrounding cells, if cell is on the edge, evaluate only actually adjacent,
-//with varying dif, refactor to cal corners and edges on it's own, then run evaluations
+
 function getProximous() {
     let counter = 0;
     for (i = 0; i < cells.length; i++) {
@@ -203,11 +200,11 @@ function getProximous() {
             if (mines.includes(parseInt(cells[i].id) - 11)) counter += 1;
             evalCounter(counter);
             counter = 0;
-            //cells[i].innerHTML = 'mid';
         }
     }
 }
-//supports getProx to reduce redundancy
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//        supports getProx to reduce redundancy
 function evalCounter (counter) {
     if (counter === 0) {
         zeros.push(parseInt(cells[i].id));
@@ -229,6 +226,7 @@ function evalCounter (counter) {
             eights.push(parseInt(cells[i].id));
         }
 }
+
 //----------------------------------------RUNS DURING GAMEPLAY
 
 function renderMessage () {
@@ -240,6 +238,7 @@ function renderMessage () {
         msg.innerHTML = 'BOOOOM!'
     }
 }
+
 function checkWin () {
     mines.forEach(function(mine) {
         if (revealed.includes(mine)) {
@@ -261,6 +260,7 @@ function renderWin () {
         }
     }
 }
+
 function renderLoss() {
     if (gameStatus === 'L') {
         for (i = 0; i < cells.length; i++) {
