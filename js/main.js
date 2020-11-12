@@ -31,6 +31,7 @@ let eights;
 //cache of cells for iteration in render
 const cells = document.getElementById('board').children;
 const msg = document.getElementById('msg');
+const resetBtn = document.getElementById('reset');
 
 
 /*----- event listeners -----*/
@@ -38,6 +39,7 @@ const msg = document.getElementById('msg');
 document.getElementById('board').addEventListener('click', handleClick);
 document.getElementById('board').addEventListener('contextmenu', handleRightClick);
 document.getElementById('reset').addEventListener('click', init);
+
 
 /*----- functions -----*/
 //-------------------------------------------------------------main functions here
@@ -64,9 +66,11 @@ function handleRightClick (evt) {
         evt.target.id === 'board' || gameStatus !== null) {
             return;
         } else if (evt.target.innerHTML === '') {
-            evt.target.innerHTML = '🎁';
+            evt.target.innerHTML = '🎄';
+            evt.target.style.fontSize = '50px';
         } else if (evt.target.innerHTML !== '') {
             evt.target.innerHTML = ''
+            evt.target.style.fontSize = '20px';
         }
 }
 
@@ -84,6 +88,7 @@ function init () {
 }
 
 function render () {
+    resetBtn.style.visibility = gameStatus ? 'visible' : 'hidden';
     renderCells();
     renderMessage();
     renderWin();

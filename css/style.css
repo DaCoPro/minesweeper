@@ -23,7 +23,7 @@ body {
     /*margin: 0px;*/
     background-color: #17672e;
     margin-top: 50px;
-    
+    font-size: 20px;
 }
 
 #board div {
@@ -34,3 +34,6 @@ body {
     width: 50px;
 }
 
+#reset {
+    margin-top: 50px;
+}
