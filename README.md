@@ -4,8 +4,9 @@ To win, flag (right click) all mines. To loose, reveal a mine.
 ## FAQ: What do Those Numbers Mean? 
 The numbers tell you how many mines surround a square. <br> '1' square? You're pretty safe. '8'? Better continue your sweeping elsewhere.
 
+![image](https://i.imgur.com/DpzGIq8.png)
 
-ENTER SCREENSHOTS HERE AFTER STYLING
+
 
 ## Technologies Used:
 This game runs on HTML, CSS, and JavaScrript. <br>
