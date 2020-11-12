@@ -65,12 +65,11 @@ function handleRightClick (evt) {
     if (revealed.includes(parseInt(evt.target.id)) || 
         evt.target.id === 'board' || gameStatus !== null) {
             return;
-        } else if (evt.target.class === undefined || evt.target.class === "0") {
-            evt.target.className +=  '1';
-        } else if (evt.target.classList.contains('1')) {
-            evt.target.removeClass('1');
+        } else if (evt.target.innerHTML === '') {
+            evt.target.innerHTML = '❌';
+        } else if (evt.target.innerHTML !== '') {
+            evt.target.innerHTML = ''
         }
-    renderFlags();
 }
 
 //---------------------------------------------------------secondary functions here
@@ -270,14 +269,6 @@ function renderLoss() {
                 cells[i].innerHTML = '💥';
             }
         }
-    }
-}
-
-function renderFlags () {
-    for (i = 0; i < cells.length; i++) {
-        if (cells[i].classList.contains('1')) {
-            cells[i].innerHTML = '🚩';
-        } 
     }
 }
 
