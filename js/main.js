@@ -56,8 +56,8 @@ function handleClick (evt) {
     for (i = 0; i < 20; i ++) {
        floodZeros();
     }
-   
     checkWin();
+    
     render();
 }
 
