@@ -13,7 +13,6 @@ body {
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     height: 310px;
     width: 310px;
-    /*margin: 0px;*/
     background-color: #87ce0e;
 }
 

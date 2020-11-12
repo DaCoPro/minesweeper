@@ -66,7 +66,7 @@ function handleRightClick (evt) {
         evt.target.id === 'board' || gameStatus !== null) {
             return;
         } else if (evt.target.innerHTML === '') {
-            evt.target.innerHTML = '❌';
+            evt.target.innerHTML = '💣';
         } else if (evt.target.innerHTML !== '') {
             evt.target.innerHTML = ''
         }
