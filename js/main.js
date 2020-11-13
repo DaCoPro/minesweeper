@@ -48,16 +48,17 @@ init();
 
 function handleClick (evt) {
     if (revealed.includes(parseInt(evt.target.id)) || 
-        evt.target.id === 'board' || gameStatus !== null || evt.target.classList.contains('1')) return;
+        evt.target.id === 'board' || gameStatus !== null || 
+        evt.target.classList.contains('1')) return;
     revealed.push(parseInt(evt.target.id));
     if (zeros.includes(parseInt(evt.target.id))) {
         revealedZeros.push(parseInt(evt.target.id));
     }
-    for (i = 0; i < 20; i ++) {
+    for (i = 0; i < 16; i ++) {
        floodZeros();
     }
+
     checkWin();
-    
     render();
 }
 
@@ -72,6 +73,8 @@ function handleRightClick (evt) {
             evt.target.innerHTML = ''
             evt.target.style.fontSize = '20px';
         }
+    checkWin();
+    render();
 }
 
 //---------------------------------------------------------secondary functions here
@@ -125,13 +128,18 @@ function resetBoard () {
 }
 
 function getMines () {
-    for (i =1; i < 16; i++) {
-        mines.push(getRandomInt(1, 100));
+    while (mines.length < 15) {
+        let num = getRandomInt(1, 100);
+        if (mines.includes(num)) {
+        } else {
+            mines.push(num);
+        }
     }
 }
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
+
 }
 
 function getProximous() {
@@ -245,14 +253,26 @@ function renderMessage () {
 }
 
 function checkWin () {
+    let counter = 0;
     mines.forEach(function(mine) {
         if (revealed.includes(mine)) {
             gameStatus = 'L';
         }
     });
-    if (mines.length + revealed.length === cells.length) {
-        gameStatus = 'W';
+    // if (revealed.length + mines.length === cells.length ) {
+    //     gameStatus = 'W';
+    // }
+    for (i = 0; i < cells.length; i++) {
+        if (mines.includes(parseInt(cells[i].id)) && cells[i].innerHTML === '🎄') {
+            counter += 1;
+            console.log(counter)
+            if (counter === mines.length) {
+                gameStatus = 'W';
+            }
+        }
+
     }
+    counter = 0;
 }
 
 function renderWin () {
@@ -261,7 +281,7 @@ function renderWin () {
             if (mines.includes(parseInt(cells[i].id))) {
                 cells[i].style.backgroundColor = 'white';
                 cells[i].innerHTML = '🎁';
-            }D
+            }
         }
     }
 }
@@ -615,5 +635,4 @@ function floodZeros () {
             }
         }
     })
-    
 }

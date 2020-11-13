@@ -20,7 +20,6 @@ body {
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     height: 520px;
     width: 520px;
-    /*margin: 0px;*/
     background-color: #17672e;
     margin-top: 50px;
     font-size: 20px;
