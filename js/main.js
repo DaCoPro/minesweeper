@@ -77,14 +77,13 @@ function handleRightClick (evt) {
 //---------------------------------------------------------secondary functions here
 
 function init () {
-    //reset
+
     resetState();
     resetBoard();
-    //build state
     getMines();
     getProximous();
-    //display
     render();
+
 }
 
 function render () {
@@ -125,7 +124,7 @@ function resetBoard () {
 }
 
 function getMines () {
-    for (i =1; i < 25; i++) {
+    for (i =1; i < 19; i++) {
         mines.push(getRandomInt(1, 100));
     }
 }
@@ -215,7 +214,7 @@ function evalCounter (counter) {
         zeros.push(parseInt(cells[i].id));
     } else if (counter === 1) {
             ones.push(parseInt(cells[i].id));
-        } else if ( counter === 2) {
+        } else if (counter === 2) {
             twos.push(parseInt(cells[i].id));
         } else if (counter === 3) {
             threes.push(parseInt(cells[i].id));
@@ -250,9 +249,9 @@ function checkWin () {
             gameStatus = 'L';
         }
     });
-    if (revealed.length + mines.length === cells.length + 4) {
+    if (mines.length + revealed.length === cells.length) {
         gameStatus = 'W';
-    } 
+    }
 }
 
 function renderWin () {
@@ -260,7 +259,7 @@ function renderWin () {
         for (i = 0; i < cells.length; i++) {
             if (mines.includes(parseInt(cells[i].id))) {
                 cells[i].style.backgroundColor = 'green';
-                cells[i].innerHTML = '💣';
+                cells[i].innerHTML = '🎁';
             }
         }
     }
