@@ -125,7 +125,7 @@ function resetBoard () {
 }
 
 function getMines () {
-    for (i =1; i < 19; i++) {
+    for (i =1; i < 16; i++) {
         mines.push(getRandomInt(1, 100));
     }
 }
@@ -259,7 +259,7 @@ function renderWin () {
     if (gameStatus === 'W') {
         for (i = 0; i < cells.length; i++) {
             if (mines.includes(parseInt(cells[i].id))) {
-                cells[i].style.backgroundColor = 'green';
+                cells[i].style.backgroundColor = 'white';
                 cells[i].innerHTML = '🎁';
             }D
         }
