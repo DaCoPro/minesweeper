@@ -120,6 +120,7 @@ function resetBoard () {
     for (i = 0; i < cells.length; i++) {
         cells[i].innerHTML = '';
         cells[i].style.backgroundColor = '#A4D04F';
+        cells[i].style.fontSize = '20px';
     }
 }
 
@@ -260,7 +261,7 @@ function renderWin () {
             if (mines.includes(parseInt(cells[i].id))) {
                 cells[i].style.backgroundColor = 'green';
                 cells[i].innerHTML = '🎁';
-            }
+            }D
         }
     }
 }
