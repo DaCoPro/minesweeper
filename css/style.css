@@ -1,11 +1,18 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@600&family=Mountains+of+Christmas:wght@700&display=swap');
+
 #header {
     background-color:#dd362e;
     margin-top: 50px;
     width: 100vh;
     text-align: center;
+    font-family: 'Mountains of Christmas', cursive;
 }
-
+h1 {
+    font-size: 50px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
 
 body {
     display: flex;
