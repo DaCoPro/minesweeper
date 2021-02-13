@@ -259,13 +259,10 @@ function checkWin () {
             gameStatus = 'L';
         }
     });
-    // if (revealed.length + mines.length === cells.length ) {
-    //     gameStatus = 'W';
-    // }
+   
     for (i = 0; i < cells.length; i++) {
         if (mines.includes(parseInt(cells[i].id)) && cells[i].innerHTML === '🎄') {
             counter += 1;
-            console.log(counter)
             if (counter === mines.length) {
                 gameStatus = 'W';
             }

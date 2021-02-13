@@ -12,7 +12,7 @@ The numbers tell you how many mines surround a square. <br> '1' square? You're p
 This game runs on HTML, CSS, and JavaScrript. <br>
 
 ## Getting Started:
-If you think you're ready... [PLAY THE GAME.](https://comerbdavid.github.io/minesweeper/ ).
+If you think you're ready... [PLAY THE GAME.](https://dacopro.github.io/minesweeper/).
 
 ## Future Impovements:
 - Supporting several size settings, which would correspond to selected difficulty.
